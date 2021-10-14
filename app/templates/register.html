@@ -6,12 +6,16 @@
         {{ form.csrf_token }}
         <div class="form-group">
             <fieldset>
-                {{ form.name.label }}
-                {{ form.name(class="form-control", placeholder="Name") }}
+                {{ form.username.label }}
+                {{ form.name(class="form-control", placeholder="Username") }}
             </fieldset>
             <fieldset>
                 {{ form.email.label }}
                 {{ form.email(class="form-control", placeholder="Email") }}
+            </fieldset>
+            <fieldset>
+                {{ form.name.label }}
+                {{ form.email(class="form-control", placeholder="Name") }}
             </fieldset>
             <fieldset>
                 {{ form.phone.label }}
@@ -25,7 +29,7 @@
                 {{ form.confirm_password.label }}
                 {{ form.confirm_password(class="form-control", placeholder="Confirm Password") }}
             </fieldset>
-            {{ form.submit(class='btn btn-secondary') }}
+            {{ form.submit(class='btn btn-primary') }}
         </div>
     </form>
 {% endblock %}
