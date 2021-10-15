@@ -4,7 +4,7 @@ from app.forms import LoginForm, UserForm
 from app.models import User
 from flask_login import login_user, logout_user, current_user, login_required
 
-@app.route('/')
+@app.route('/index')
 def index():
     return render_template('index.html')
 
@@ -18,10 +18,11 @@ def register():
         phone = register_form.phone.data
         password = register_form.password.data
         print("submitted correctly")
+
         existing_user = User.query.filter_by(username=username).all()
-        # if existing_user:
-        #     flash(f'The username {username} is already in use. Please try again.', 'danger')
-        #     return redirect(url_for('register'))
+        if existing_user:
+            flash(f'The username {username} is already in use. Please try again.', 'danger')
+            return redirect(url_for('register'))
        
         new_user = User(username, email, name, phone, password)
         db.session.add(new_user)
@@ -41,12 +42,13 @@ def login():
 
         user = User.query.filter_by(username=username).first()
 
-        if user is None or not user.check_password(password):
-            flash('wrong username or password', 'danger')
-            return redirect(url_for('login'))
+        # if user is None or not user.check_password(password):
+        #     flash('wrong username or password', 'danger')
+        #     return redirect(url_for('login'))
 
         login_user(user)
         flash(f'Welcome {user.username}, you have successfully logged in.', 'success')
+        return redirect(url_for('index'))
 
     return render_template('login.html', login_form=form)
 
