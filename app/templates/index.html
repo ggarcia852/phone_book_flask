@@ -21,6 +21,12 @@
       <li class="list-group-item">Email: {{ c.email }}</li>
       <li class="list-group-item">Address: {{ c.address }}</li>
     </ul>
+    <div class="card-body">
+      <a href="#" class="card-link">Delete Contact</a>
+      <!-- not working -->
+     {# {{ url_for('delete_contact'), phonebook_id=phonebook.id) }}  #}
+      <a href="#" class="card-link">Update Contact</a>
+    </div>
   </div>
 
 {% endfor %}

@@ -92,3 +92,14 @@ def add_contact():
         return redirect(url_for('index'))
     return render_template('add_contact.html', form=contact, title=title)
 
+
+
+@app.route('/delete_contact/<phonebook_id>', methods=['POST'])
+@login_required
+def delete_contact(phonebook_id):
+    phonebook_id = Phonebook.query.get_or_404(phonebook_id)
+
+    db.session.delete(phonebook_id)
+    db.session.commit()
+    flash(f'You have deleted {phonebook_id.first_name} from your contacts.', 'success')
+    return redirect(url_for('index'), phonebook_id=phonebook_id)
