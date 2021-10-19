@@ -2,9 +2,29 @@
 
 {% block content %}
 
-<div class="container">
-<h1>These are your contacts:</h1>
-</div>
+<div class="container pt-5">
 
+{% if current_user.is_authenticated %}
+    <h1>Hello {{ current_user.username }}! <br> <br> There are your contacts:</h1>
+{% else %}
+    <h1>Please Sign In to See Your Contacts or Register to Get Started</h1>
+{% endif %}
+
+{% for c in contacts %}
+
+<div class="card" style="width: 18rem;">
+    <div class="card-header">
+    Name: {{ c.first_name }} {{ c.last_name }}
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Phone: {{ c.phone }}</li>
+      <li class="list-group-item">Email: {{ c.email }}</li>
+      <li class="list-group-item">Address: {{ c.address }}</li>
+    </ul>
+  </div>
+
+{% endfor %}
+
+</div>
 
 {% endblock %}
